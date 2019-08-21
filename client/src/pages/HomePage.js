@@ -5,6 +5,7 @@ import axios from "axios";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
+import { REACT_APP_API_VERSION } from "../constants";
 import TokenStorage from "../TokenStorage";
 import { SEARCH_URL, ERROR_URL } from "../routes";
 
@@ -12,7 +13,7 @@ import Loader from "../components/Loader";
 
 const tokenStorage = new TokenStorage();
 
-export const HomePage = ({ isLoading, error, history }) => {
+export const HomePage = ({ isLoading, error }) => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   if (isLoading || isLoggingIn) {
@@ -27,7 +28,7 @@ export const HomePage = ({ isLoading, error, history }) => {
     setIsLoggingIn(true);
 
     axios
-      .get("api/login")
+      .get(`api/${REACT_APP_API_VERSION}/login`)
       .then(({ data: { url } }) => {
         window.location = url;
       })

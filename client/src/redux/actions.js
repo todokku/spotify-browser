@@ -1,6 +1,8 @@
 import SpotifyWebApi from "spotify-web-api-js";
 import axios from "axios";
 
+import { REACT_APP_API_VERSION } from "../constants";
+
 import {
   SEARCH_STARTED,
   GET_ARTIST_STARTED,
@@ -104,7 +106,7 @@ export const getToken = (code) => {
     dispatch(setIsLoading(true));
 
     axios
-      .post("api/get_token", { code })
+      .post(`api/${REACT_APP_API_VERSION}/get_token`, { code })
       .then(({ data }) => {
         tokenStorage.setToken(data).then(() => {
           dispatch(tokenUpdated());
@@ -134,7 +136,7 @@ export const refreshToken = () => {
     const { refresh_token } = tokenStorage.getToken();
 
     axios
-      .post("api/refresh_token", {
+      .post(`api/${REACT_APP_API_VERSION}/refresh_token`, {
         refresh_token,
       })
       .then(({ data }) => {
