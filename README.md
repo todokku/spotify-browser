@@ -1,24 +1,45 @@
-# README
+# Spotify Browser
+Note: This project was created just for technical training.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
+### Install dependencies
+```
+bundle
+yarn --cwd client install
+```
 
-Things you may want to cover:
+### Add alias in your hosts file
+Update your `/etc/hosts` file with the next line
+```
+127.0.0.1 app.spotify.dev
+```
 
-* Ruby version
+### Setup one spotify app
+Follow [this guide](https://developer.spotify.com/documentation/general/guides/app-settings/) to setup one spotify app and ensure to add `http://app.spotify.dev:3000/auth_callback` in your **Redirect URIs** section.
 
-* System dependencies
+### Set environment variables
+```
+echo "SPOTIFY_CLIENT_ID='your spotify client id'" >> .env
+echo "SPOTIFY_CLIENT_SECRET_ID='your spotify client secret id'" >> .env
+echo "SPOTIFY_URL=https://accounts.spotify.com" >> .env
+echo "SPOTIFY_APP_URL=http://app.spotify.dev:3000" >> .env
+echo "HOST=app.spotify.dev" >> client/.env
+echo "BROWSER=none" >> client/.env
+```
 
-* Configuration
+## Run app
+```
+bin/rake start
+```
+Navigate to http://app.spotify.dev:3000
 
-* Database creation
+## Run tests
+### Client
+```
+yarn --cwd client test --watchAll=false
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### API
+```
+bin/rake
+```
