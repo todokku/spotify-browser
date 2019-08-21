@@ -11,6 +11,7 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
       scopes: 'user-read-email'
     }.to_query
 
-    assert_redirected_to "#{Spotify::Urls::SPOTIFY_URL}/authorize?#{params}"
+    response = { url: "#{Spotify::Urls::SPOTIFY_URL}/authorize?#{params}" }
+    assert_response :success, response.to_json
   end
 end
