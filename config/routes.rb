@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get 'login', action: :show, controller: 'login'
       post 'get_token', action: :create, controller: 'token'
       post 'refresh_token', action: :refresh, controller: 'token'
+      get 'colors', action: :colors, controller: 'design'
     end
   end
 

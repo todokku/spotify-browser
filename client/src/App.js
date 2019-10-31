@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
 
-import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
+
+import { FigmaThemeProvider } from "./figma";
 
 import { Provider } from "react-redux";
 import { store } from "./redux";
 
 import Router from "./Router";
-import theme from "./theme";
 import "./App.css";
 
 import LogoIcon from "./components/LogoIcon";
@@ -19,7 +19,7 @@ const App = () => {
   return (
     <Fragment>
       <CssBaseline />
-      <ThemeProvider theme={theme}>
+      <FigmaThemeProvider>
         <Container id="container" fixed data-testid="main-container">
           <Box id="box">
             <LogoIcon className="logo" size="medium" />
@@ -29,7 +29,7 @@ const App = () => {
             </Provider>
           </Box>
         </Container>
-      </ThemeProvider>
+      </FigmaThemeProvider>
     </Fragment>
   );
 };
