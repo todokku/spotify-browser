@@ -26,4 +26,22 @@ class FigmaService
 
     colors
   end
+
+  def self.get_comments
+    response = get(
+      "/files/#{Figma::Ids::FIGMA_FILE_COMMENTS_ID}/comments",
+      headers: {
+        'X-Figma-Token' => Figma::Ids::FIGMA_API_ID
+      }
+    )
+
+    comments = response['comments'].map do |child|
+
+      {
+        message: child['message'],
+      }
+    end
+
+    comments
+  end
 end

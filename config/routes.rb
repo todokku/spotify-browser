@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post 'get_token', action: :create, controller: 'token'
       post 'refresh_token', action: :refresh, controller: 'token'
       get 'colors', action: :colors, controller: 'design'
+      get 'comments', action: :comments, controller: 'design'
     end
   end
 

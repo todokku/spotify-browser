@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import useFigmaComments from "../hooks/useFigmaComments";
+
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -63,6 +65,14 @@ const SearchInput = ({ queryTerm, search }) => {
     setValue(event.target.value);
   };
 
+  let figmaComments = useFigmaComments();
+  if (figmaComments) {
+    /// Buscar una forma de mapear comentarios con componentes mas reusable
+    figmaComments = figmaComments
+      .map((comment) => JSON.parse(comment.message))
+      .filter((comment) => comment.id === "search");
+  }
+
   return (
     <form
       className={classes.root}
@@ -71,7 +81,11 @@ const SearchInput = ({ queryTerm, search }) => {
     >
       <TextField
         id="search"
-        placeholder="Start typing here..."
+        placeholder={
+          figmaComments && figmaComments[0].placeholder
+            ? figmaComments[0].placeholder
+            : "Start typing here..."
+        }
         onChange={handleChange}
         value={value}
         margin="none"
